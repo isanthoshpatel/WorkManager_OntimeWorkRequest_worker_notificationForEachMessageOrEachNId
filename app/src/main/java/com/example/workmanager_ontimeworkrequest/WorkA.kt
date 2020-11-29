@@ -11,14 +11,14 @@ import androidx.work.WorkerParameters
 import java.lang.Exception
 
 class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
-
+    var i = inputData.getInt("i",1)
     override suspend fun doWork(): Result {
 
         try {
             var nm = NotificationManagerCompat.from(applicationContext)
             var n1 = NotificationCompat.Builder(applicationContext, App.id)
 
-                .setContentTitle("helllo...")
+                .setContentTitle("helllo...$i")
                 .setContentText("how are you dude there.......will you come to there....to have some things...")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(
@@ -29,7 +29,7 @@ class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
                 )
                 .setStyle(
                     NotificationCompat.BigTextStyle()
-                        .setBigContentTitle("this is big content title")
+                        .setBigContentTitle("this is big content title...$i")
                         .bigText(
                             "this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications this is bic text style , here you can add upto seve lines length of text. usually all the styles like bigtext,bigpicture,inbox are happens on exanded view of notifications"
                         )
@@ -38,7 +38,8 @@ class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
                 .setColor(Color.RED)
                 .setOnlyAlertOnce(true)
 
-            nm.notify(1, n1.build())
+            var i = inputData.getInt("i",1)
+            nm.notify(i, n1.build())
             return Result.success()
         } catch (e: Exception) {
             return Result.failure()
