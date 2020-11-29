@@ -11,12 +11,14 @@ import androidx.work.WorkerParameters
 import java.lang.Exception
 
 class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
+
     var i = inputData.getInt("i",1)
+
     override suspend fun doWork(): Result {
 
         try {
             var nm = NotificationManagerCompat.from(applicationContext)
-            var n1 = NotificationCompat.Builder(applicationContext, App.id)
+            var notification = NotificationCompat.Builder(applicationContext, App.id)
 
                 .setContentTitle("helllo...$i")
                 .setContentText("how are you dude there.......will you come to there....to have some things...")
@@ -38,8 +40,7 @@ class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
                 .setColor(Color.RED)
                 .setOnlyAlertOnce(true)
 
-            var i = inputData.getInt("i",1)
-            nm.notify(i, n1.build())
+            nm.notify(i, notification.build())
             return Result.success()
         } catch (e: Exception) {
             return Result.failure()
