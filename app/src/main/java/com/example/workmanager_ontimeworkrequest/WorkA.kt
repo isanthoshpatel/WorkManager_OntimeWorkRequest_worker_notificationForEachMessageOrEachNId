@@ -18,7 +18,7 @@ class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
 
         try {
             var nm = NotificationManagerCompat.from(applicationContext)
-            var notification = NotificationCompat.Builder(applicationContext, App.id)
+            var n1 = NotificationCompat.Builder(applicationContext, App.id)
 
                 .setContentTitle("helllo...$i")
                 .setContentText("how are you dude there.......will you come to there....to have some things...")
@@ -40,8 +40,10 @@ class MyWork(c: Context, wp: WorkerParameters) : CoroutineWorker(c, wp) {
                 .setColor(Color.RED)
                 .setOnlyAlertOnce(true)
 
-            nm.notify(i, notification.build())
+            nm.notify(i, n1.build())
+
             return Result.success()
+
         } catch (e: Exception) {
             return Result.failure()
         }
